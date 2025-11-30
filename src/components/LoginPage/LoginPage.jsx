@@ -1,4 +1,6 @@
 import { useId, useState } from 'react';
+import { Link } from 'react-router-dom';
+import styles from './LoginPage.module.css';
 
 function LoginPage() {
   const usernameId = useId();
@@ -23,28 +25,44 @@ function LoginPage() {
 
   return (
     <>
-      <h1>Log In</h1>
-      <form>
-        <label htmlFor={usernameId}>Username :</label>
+      <h1 className={styles.h1}>Log In</h1>
+      <form className={styles.form}>
+        <label htmlFor={usernameId} className={styles.label}>
+          Username :
+        </label>
         <input
           type="text"
           id={usernameId}
           name="username"
           value={username}
           onChange={handleInputChange}
+          className={styles.input}
         />
 
-        <label htmlFor={passwordId}>Password :</label>
+        <label htmlFor={passwordId} className={styles.label}>
+          Password &nbsp;:
+        </label>
         <input
           type="password"
           id={passwordId}
           name="password"
           value={password}
           onChange={handleInputChange}
+          className={styles.input}
         />
 
-        <button type="button">Log In</button>
+        <div className={styles['btn-container']}>
+          <button type="button" className={styles['login-btn']}>
+            Log In
+          </button>
+        </div>
       </form>
+      <p className={styles['register-msg']}>
+        Don't have an account?&nbsp;{' '}
+        <Link to="/register" className={styles['register-link']}>
+          Register
+        </Link>
+      </p>
     </>
   );
 }
