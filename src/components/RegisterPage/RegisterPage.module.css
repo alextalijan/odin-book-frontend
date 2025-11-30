@@ -8,7 +8,7 @@
 .form {
   display: grid;
   margin: 0 auto;
-  grid-template-columns: max-content 250px;
+  grid-template-columns: max-content 275px;
   justify-content: center;
   align-items: center;
   row-gap: 0.7rem;
@@ -30,7 +30,7 @@
   justify-content: center;
 }
 
-.login-btn {
+.register-btn {
   background-color: var(--btn);
   transition: transform 0.5s;
   border: none;
@@ -41,12 +41,12 @@
   margin-top: 1.2rem;
 }
 
-.login-btn:hover {
+.register-btn:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.register-msg {
+.login-msg {
   text-align: center;
   font-size: 1.3rem;
   opacity: 0.6;
@@ -54,7 +54,7 @@
   cursor: default;
 }
 
-.register-link {
+.login-link {
   background-color: var(--btn-secondary);
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -64,6 +64,6 @@
   display: inline-block;
 }
 
-.register-link:hover {
+.login-link:hover {
   transform: scale(1.1);
 }
