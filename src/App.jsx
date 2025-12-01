@@ -22,7 +22,7 @@ function App() {
           setUser(json.user);
         }
       })
-      .finally(() => setTimeout(() => setLoadingUser(false), 1000));
+      .finally(() => setLoadingUser(false));
   }, []);
 
   function login(user) {
