@@ -1,12 +1,16 @@
-import { useId, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useId, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './LoginPage.module.css';
+import UserContext from '../../contexts/UserContext';
 
 function LoginPage() {
   const usernameId = useId();
   const passwordId = useId();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const { login } = useContext(UserContext);
+  const navigate = useNavigate();
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -23,9 +27,37 @@ function LoginPage() {
     }
   }
 
+  function handleLogin() {
+    fetch(import.meta.env.VITE_API + '/users/login', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (!json.success) {
+          return setError(json.message);
+        }
+
+        // Remember the user in frontend
+        login(json.user);
+
+        // Navigate user to the home page
+        navigate('/');
+      })
+      .catch((error) => setError(error.message));
+  }
+
   return (
     <>
       <h1 className={styles.h1}>Log In</h1>
+      {error && <p className={styles.error}>{error}</p>}
       <form className={styles.form}>
         <label htmlFor={usernameId} className={styles.label}>
           Username :
@@ -52,7 +84,11 @@ function LoginPage() {
         />
 
         <div className={styles['btn-container']}>
-          <button type="button" className={styles['login-btn']}>
+          <button
+            type="button"
+            className={styles['login-btn']}
+            onClick={handleLogin}
+          >
             Log In
           </button>
         </div>

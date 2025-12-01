@@ -36,6 +36,7 @@ function RegisterPage() {
     // Send the request to the browser
     fetch(import.meta.env.VITE_API + '/users', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
