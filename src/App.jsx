@@ -17,11 +17,14 @@ function App() {
   }
 
   return (
-    <UserContext.Provider value={{ login }}>
+    <UserContext.Provider value={{ user, login }}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+
+          {/* Protected routes */}
+          <Route element={<ProtectedRoute />}></Route>
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
