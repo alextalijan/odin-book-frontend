@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import UserContext from './contexts/UserContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './components/LoginPage/LoginPage';
@@ -11,6 +11,19 @@ function App() {
   const [loadingUser, setLoadingUser] = useState(true);
 
   // Check if the user has already logged In
+  useEffect(() => {
+    fetch(import.meta.env.VITE_API + '/users/me', {
+      method: 'GET',
+      credentials: 'include',
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.success) {
+          setUser(json.user);
+        }
+      })
+      .finally(() => setTimeout(() => setLoadingUser(false), 1000));
+  }, []);
 
   function login(user) {
     setUser(user);
