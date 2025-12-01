@@ -1,14 +1,18 @@
 import styles from './RegisterPage.module.css';
-import { useId, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useId, useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import UserContext from '../../contexts/UserContext';
 
 function RegisterPage() {
+  const navigate = useNavigate();
+  const { login } = useContext(UserContext);
   const usernameId = useId();
   const passwordId = useId();
   const passwordConfirmationId = useId();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [error, setError] = useState(null);
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -28,9 +32,38 @@ function RegisterPage() {
     }
   }
 
+  function handleRegistration() {
+    // Send the request to the browser
+    fetch(import.meta.env.VITE_API + '/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        passwordConfirmation,
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (!json.success) {
+          return setError(json.message);
+        }
+
+        // Log the user in the frontend
+        login(json.user);
+
+        // Redirect to index page
+        navigate('/');
+      })
+      .catch((error) => setError(error.message));
+  }
+
   return (
     <>
       <h1 className={styles.h1}>Register</h1>
+      {error && <p className={styles.error}>{error}</p>}
       <form className={styles.form}>
         <label htmlFor={usernameId} className={styles.label}>
           Username
@@ -71,7 +104,11 @@ function RegisterPage() {
         />
 
         <div className={styles['btn-container']}>
-          <button type="button" className={styles['register-btn']}>
+          <button
+            type="button"
+            className={styles['register-btn']}
+            onClick={handleRegistration}
+          >
             Register
           </button>
         </div>
