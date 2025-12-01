@@ -1,12 +1,23 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 import UserContext from './contexts/UserContext';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  function login(user) {
+    setUser(user);
+  }
+
+  function logout() {
+    setUser(null);
+  }
+
   return (
-    <UserContext.Provider>
+    <UserContext.Provider value={{ login }}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
