@@ -59,7 +59,9 @@ function App() {
 
           {/* Protected routes */}
           <Route element={<ProtectedRoute />}>
-            <Route element={<Layout />}></Route>
+            <Route element={<Layout />}>
+              <Route path="/" element={<p>Hello</p>} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

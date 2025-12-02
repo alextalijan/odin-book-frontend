@@ -1,0 +1,37 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--header);
+  padding: 1rem 2rem;
+}
+
+.links-list {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  list-style-type: none;
+}
+
+.link-listing {
+  transition: transform 0.3s;
+}
+
+.link-listing:last-child {
+  margin-left: auto;
+}
+
+.link-listing:hover {
+  transform: scale(1.08);
+}
+
+.link {
+  font-size: 2.3rem;
+  color: white;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
