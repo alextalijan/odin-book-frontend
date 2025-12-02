@@ -1,10 +1,10 @@
 .header {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   background-color: var(--header);
   padding: 1rem 2rem;
+  transition: top 0.3s; /* Transition effect when sliding down (and up) */
 }
 
 .links-list {

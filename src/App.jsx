@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
+import HomePage from './components/HomePage/HomePage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -63,7 +64,7 @@ function App() {
           {/* Protected routes */}
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
-              <Route path="/" element={<p>Hello</p>} />
+              <Route path="/" element={<HomePage />} />
             </Route>
           </Route>
         </Routes>
