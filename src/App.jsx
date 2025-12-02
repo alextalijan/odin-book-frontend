@@ -30,8 +30,11 @@ function App() {
     setUser(user);
   }
 
-  function logout() {
-    // removeCookie('jwt');
+  async function logout() {
+    await fetch(import.meta.env.VITE_API + '/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
     setUser(null);
   }
 
