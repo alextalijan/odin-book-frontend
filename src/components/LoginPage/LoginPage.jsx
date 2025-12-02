@@ -28,7 +28,7 @@ function LoginPage() {
   }
 
   function handleLogin() {
-    fetch(import.meta.env.VITE_API + '/users/login', {
+    fetch(import.meta.env.VITE_API + '/login', {
       method: 'POST',
       credentials: 'include',
       headers: {
