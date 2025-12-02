@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import UserContext from './contexts/UserContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import Layout from './components/Layout';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 
@@ -30,6 +31,7 @@ function App() {
   }
 
   function logout() {
+    // removeCookie('jwt');
     setUser(null);
   }
 
@@ -49,7 +51,7 @@ function App() {
     );
 
   return (
-    <UserContext.Provider value={{ user, login }}>
+    <UserContext.Provider value={{ user, login, logout }}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
@@ -57,7 +59,7 @@ function App() {
 
           {/* Protected routes */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/" />
+            <Route element={<Layout />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
