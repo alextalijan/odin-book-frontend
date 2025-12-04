@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import styles from './HomePage.module.css';
 import { useContext, useEffect, useState, useRef } from 'react';
+import Post from '../Post/Post';
 
 function HomePage() {
   const { user } = useContext(UserContext);
@@ -55,9 +56,18 @@ function HomePage() {
           </Link>
         </>
       ) : (
-        <div>
+        <div className={styles.posts}>
           {posts.map((post) => {
-            return <Post />;
+            return (
+              <Post
+                key={post.id}
+                text={post.text}
+                author={post.author.username}
+                numLikes={post._count.likes}
+                numComments={post._count.comments}
+                postedAt={post.postedAt}
+              />
+            );
           })}
         </div>
       )}
