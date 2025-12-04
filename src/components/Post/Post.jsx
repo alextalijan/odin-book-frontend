@@ -1,7 +1,7 @@
 import styles from './Post.module.css';
 import formatDate from '../../utils/formatDate';
 
-function Post({ text, author, numLikes, numComments, postedAt }) {
+function Post({ text, author, numLikes, numComments, postedAt, comments }) {
   return (
     <div className={styles.card}>
       <span className={styles.author}>{author}</span>
@@ -29,6 +29,22 @@ function Post({ text, author, numLikes, numComments, postedAt }) {
         </div>
         <p className={styles['post-date']}>{formatDate(postedAt)}</p>
       </div>
+      {comments.length > 0 && (
+        <div className={styles['latest-comments']}>
+          <span className={styles['comments-heading']}>Latest Comments</span>
+          <ul className={styles['comments-list']}>
+            {comments.map((comment) => {
+              return (
+                <li key={comment.id} className={styles.comment}>
+                  <span>
+                    <b>{comment.author.username}</b> : {comment.text}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

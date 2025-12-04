@@ -66,6 +66,7 @@ function HomePage() {
                 numLikes={post._count.likes}
                 numComments={post._count.comments}
                 postedAt={post.postedAt}
+                comments={post.comments}
               />
             );
           })}
