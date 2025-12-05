@@ -3,9 +3,7 @@
   top: 0;
   width: 100%;
   background-color: var(--header);
-  opacity: 0.95;
   padding: 1rem 2rem;
-  transition: top 0.3s; /* Transition effect when sliding down (and up) */
 }
 
 .links-list {
