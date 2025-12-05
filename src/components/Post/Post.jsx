@@ -1,7 +1,54 @@
 import styles from './Post.module.css';
 import formatDate from '../../utils/formatDate';
+import { useState } from 'react';
 
-function Post({ text, author, numLikes, numComments, postedAt, comments }) {
+function Post({
+  id,
+  text,
+  author,
+  numLikes,
+  numComments,
+  postedAt,
+  comments,
+  isLiked,
+}) {
+  const [liked, setLiked] = useState(isLiked);
+  const [likesNum, setLikesNum] = useState(numLikes);
+
+  function likePost() {
+    fetch(import.meta.env.VITE_API + `/posts/${id}/likes`, {
+      method: 'POST',
+      credentials: 'include',
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (!json.success) {
+          return alert(json.message);
+        }
+
+        setLiked(true);
+        setLikesNum((prev) => prev + 1);
+      })
+      .catch((err) => alert(err.message));
+  }
+
+  function unlikePost() {
+    fetch(import.meta.env.VITE_API + `/posts/${id}/likes`, {
+      method: 'DELETE',
+      credentials: 'include',
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (!json.success) {
+          return alert(json.message);
+        }
+
+        setLiked(false);
+        setLikesNum((prev) => prev - 1);
+      })
+      .catch((err) => alert(err.message));
+  }
+
   return (
     <div className={styles.card}>
       <span className={styles.author}>{author}</span>
@@ -9,11 +56,18 @@ function Post({ text, author, numLikes, numComments, postedAt, comments }) {
       <div className={styles['post-footer']}>
         <div className={styles['post-info']}>
           <span className={styles.likes}>
-            {numLikes}{' '}
-            <button className={styles['like-btn']}>
+            {likesNum}{' '}
+            <button
+              className={styles['like-btn']}
+              onClick={liked ? unlikePost : likePost}
+            >
               <img
                 className={styles['like-icon']}
-                src={'/public/icons/not-liked.png'}
+                src={
+                  liked
+                    ? '/public/icons/liked.png'
+                    : '/public/icons/not-liked.png'
+                }
                 alt="like icon"
               />
             </button>

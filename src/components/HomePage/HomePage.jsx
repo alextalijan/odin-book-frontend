@@ -61,12 +61,14 @@ function HomePage() {
             return (
               <Post
                 key={post.id}
+                id={post.id}
                 text={post.text}
                 author={post.author.username}
                 numLikes={post._count.likes}
                 numComments={post._count.comments}
                 postedAt={post.postedAt}
                 comments={post.comments}
+                isLiked={post.isLiked}
               />
             );
           })}
