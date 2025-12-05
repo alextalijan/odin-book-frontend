@@ -4,6 +4,7 @@
   width: 100%;
   background-color: var(--header);
   padding: 1rem 2rem;
+  z-index: 1;
 }
 
 .links-list {
