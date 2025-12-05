@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: max-content;
+}
+
+.likes {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  cursor: default;
+}
+
+.like-btn {
+  border: none;
+  background: transparent;
+  position: relative;
+  top: 4px;
+  transition: transform 0.3s;
+}
+
+.like-btn:hover {
+  transform: scale(1.15);
+  cursor: pointer;
+}
+
+.like-icon {
+  width: 25px;
+}
+
+.comments {
+  font-family: inherit;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  gap: 0.2rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.comments:hover {
+  transform: scale(1.15);
+}
+
+.comments-icon {
+  width: 25px;
+  position: relative;
+  top: 2px;
+}
