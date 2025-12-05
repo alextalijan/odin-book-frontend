@@ -1,6 +1,5 @@
 import styles from './Post.module.css';
 import formatDate from '../../utils/formatDate';
-import { useState } from 'react';
 import PostStats from '../PostStats/PostStats';
 
 function Post({
@@ -12,6 +11,7 @@ function Post({
   postedAt,
   comments,
   isLiked,
+  open,
 }) {
   return (
     <div className={styles.card}>
@@ -23,12 +23,15 @@ function Post({
           isLiked={isLiked}
           numLikes={numLikes}
           numComments={numComments}
+          openPost={open}
         />
         <p className={styles['post-date']}>{formatDate(postedAt)}</p>
       </div>
       {comments.length > 0 && (
         <div className={styles['latest-comments']}>
-          <span className={styles['comments-heading']}>Latest Comments</span>
+          <button className={styles['comments-heading']} onClick={open}>
+            Latest Comments
+          </button>
           <ul className={styles['comments-list']}>
             {comments.map((comment) => {
               return (

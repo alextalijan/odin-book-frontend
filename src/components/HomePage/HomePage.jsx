@@ -10,6 +10,7 @@ function HomePage() {
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [postsError, setPostsError] = useState(null);
   const pageNum = useRef(1);
+  const [openPostId, setOpenPostId] = useState(null);
 
   // Fetch posts from followings
   useEffect(() => {
@@ -56,23 +57,27 @@ function HomePage() {
           </Link>
         </>
       ) : (
-        <div className={styles.posts}>
-          {posts.map((post) => {
-            return (
-              <Post
-                key={post.id}
-                id={post.id}
-                text={post.text}
-                author={post.author.username}
-                numLikes={post._count.likes}
-                numComments={post._count.comments}
-                postedAt={post.postedAt}
-                comments={post.comments}
-                isLiked={post.isLiked}
-              />
-            );
-          })}
-        </div>
+        <>
+          <div className={styles.posts}>
+            {posts.map((post) => {
+              return (
+                <Post
+                  key={post.id}
+                  id={post.id}
+                  text={post.text}
+                  author={post.author.username}
+                  numLikes={post._count.likes}
+                  numComments={post._count.comments}
+                  postedAt={post.postedAt}
+                  comments={post.comments}
+                  isLiked={post.isLiked}
+                  open={() => setOpenPostId(post.id)}
+                />
+              );
+            })}
+          </div>
+          {openPostId && <PostModal close={() => setOpenPostId(null)} />}
+        </>
       )}
     </>
   );

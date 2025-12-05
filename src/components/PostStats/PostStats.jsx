@@ -1,7 +1,13 @@
 import styles from './PostStats.module.css';
 import { useState } from 'react';
 
-function PostStats({ postId, isLiked, numLikes, numComments }) {
+function PostStats({
+  postId,
+  isLiked,
+  numLikes,
+  numComments,
+  openPost = null,
+}) {
   const [liked, setLiked] = useState(isLiked);
   const [likesNum, setLikesNum] = useState(numLikes);
 
@@ -56,7 +62,7 @@ function PostStats({ postId, isLiked, numLikes, numComments }) {
           />
         </button>
       </span>
-      <button className={styles.comments}>
+      <button className={styles.comments} onClick={openPost}>
         {numComments}{' '}
         <img
           className={styles['comments-icon']}
