@@ -3,6 +3,7 @@ import UserContext from '../../contexts/UserContext';
 import styles from './HomePage.module.css';
 import { useContext, useEffect, useState, useRef } from 'react';
 import Post from '../Post/Post';
+import PostModal from '../PostModal/PostModal';
 
 function HomePage() {
   const { user } = useContext(UserContext);
@@ -76,7 +77,9 @@ function HomePage() {
               );
             })}
           </div>
-          {openPostId && <PostModal close={() => setOpenPostId(null)} />}
+          {openPostId && (
+            <PostModal postId={openPostId} close={() => setOpenPostId(null)} />
+          )}
         </>
       )}
     </>
