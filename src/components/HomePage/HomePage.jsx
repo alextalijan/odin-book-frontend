@@ -12,6 +12,7 @@ function HomePage() {
   const [postsError, setPostsError] = useState(null);
   const pageNum = useRef(1);
   const [openPostId, setOpenPostId] = useState(null);
+  const [loadPosts, setLoadPosts] = useState(false);
 
   // Fetch posts from followings
   useEffect(() => {
@@ -32,6 +33,26 @@ function HomePage() {
       })
       .catch((error) => setPostsError(error.message))
       .finally(() => setLoadingPosts(false));
+  }, [loadPosts]);
+
+  // If the scroll has reached the bottom, trigger loading more posts
+  useEffect(() => {
+    if (!window) return;
+
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      if (scrollTop + windowHeight >= docHeight - 5) {
+        pageNum.current += 1;
+        setLoadPosts((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
