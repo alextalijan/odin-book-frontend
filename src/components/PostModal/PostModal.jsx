@@ -96,6 +96,7 @@ function PostModal({ postId, close }) {
         // Load the new comment
         setCommentsNum((prev) => prev + 1);
         setRefreshComments((prev) => !prev);
+        setCommentInput('');
       })
       .catch((err) => alert(err.message));
   };
