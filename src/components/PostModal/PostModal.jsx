@@ -11,6 +11,7 @@ function PostModal({ postId, close }) {
   const [comments, setComments] = useState([]);
   const [loadingComments, setLoadingComments] = useState(true);
   const [commentsError, setCommentsError] = useState(null);
+  const [loadMoreComments, setLoadMoreComments] = useState(false);
 
   // TODO: write fetch logic for loading more comments
   // Fetch the post details
@@ -51,12 +52,25 @@ function PostModal({ postId, close }) {
       })
       .catch((err) => setCommentsError(err.message))
       .finally(() => setLoadingComments(false));
-  }, [postId]);
+  }, [postId, loadMoreComments]);
+
+  function handleScroll(event) {
+    const { scrollTop, scrollHeight, clientHeight } = event.target;
+
+    console.log(scrollTop, scrollHeight - clientHeight);
+    // If the user has reached the bottom
+    if (scrollTop + 1 > scrollHeight - clientHeight) {
+      console.log('reached bottom');
+      // Load more messages
+      commentsPageNum.current += 1;
+      setLoadMoreComments((prev) => !prev);
+    }
+  }
 
   return (
     <>
       <div className={styles.backdrop} onClick={close}></div>
-      <div className={styles.post}>
+      <div className={styles.post} onScroll={handleScroll}>
         {loadingPost ? (
           <img
             className={styles['loading-icon']}
