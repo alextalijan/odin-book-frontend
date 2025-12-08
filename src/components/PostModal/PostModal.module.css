@@ -138,6 +138,34 @@
   width: max-content;
 }
 
+.add-comment-form {
+  display: grid;
+  grid-template-columns: 1fr 35px;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.comment-input {
+  resize: none;
+  padding: 0.5rem;
+  font-size: 1.05rem;
+}
+
+.send-comment-btn {
+  border: none;
+  background-color: transparent;
+  transition: transform 0.3s;
+}
+
+.send-comment-btn:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.send-icon {
+  width: 25px;
+}
+
 .comment {
   padding: 1rem;
   border-width: 1px 1px 0px 1px;

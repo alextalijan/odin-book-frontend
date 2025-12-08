@@ -7,11 +7,14 @@ function PostModal({ postId, close }) {
   const [post, setPost] = useState(null);
   const [loadingPost, setLoadingPost] = useState(true);
   const [postError, setPostError] = useState(null);
+  const [commentsNum, setCommentsNum] = useState(null);
   const commentsPageNum = useRef(1);
   const [comments, setComments] = useState([]);
   const [loadingComments, setLoadingComments] = useState(true);
   const [commentsError, setCommentsError] = useState(null);
   const [loadMoreComments, setLoadMoreComments] = useState(false);
+  const [commentInput, setCommentInput] = useState('');
+  const [refreshComments, setRefreshComments] = useState(false);
 
   // TODO: write fetch logic for loading more comments
   // Fetch the post details
@@ -27,6 +30,7 @@ function PostModal({ postId, close }) {
         }
 
         setPost(json.post);
+        setCommentsNum(json.post._count.comments);
       })
       .catch((err) => setPostError(err.message))
       .finally(() => setLoadingPost(false));
@@ -52,20 +56,49 @@ function PostModal({ postId, close }) {
       })
       .catch((err) => setCommentsError(err.message))
       .finally(() => setLoadingComments(false));
-  }, [postId, loadMoreComments]);
+  }, [postId, loadMoreComments, refreshComments]);
 
   function handleScroll(event) {
     const { scrollTop, scrollHeight, clientHeight } = event.target;
 
-    console.log(scrollTop, scrollHeight - clientHeight);
     // If the user has reached the bottom
     if (scrollTop + 1 > scrollHeight - clientHeight) {
-      console.log('reached bottom');
       // Load more messages
       commentsPageNum.current += 1;
       setLoadMoreComments((prev) => !prev);
     }
   }
+
+  function handleCommentInput(event) {
+    setCommentInput(event.target.value);
+  }
+
+  const sendComment = function thatPostsCommentToTheServer() {
+    // If comment is empty, don't send it
+    if (commentInput === '') return;
+
+    fetch(import.meta.env.VITE_API + `/posts/${postId}/comments`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        comment: commentInput,
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (!json.success) {
+          return alert(json.message);
+        }
+
+        // Load the new comment
+        setCommentsNum((prev) => prev + 1);
+        setRefreshComments((prev) => !prev);
+      })
+      .catch((err) => alert(err.message));
+  };
 
   return (
     <>
@@ -88,7 +121,7 @@ function PostModal({ postId, close }) {
                 postId={post.id}
                 isLiked={post.isLiked}
                 numLikes={post._count.likes}
-                numComments={post._count.comments}
+                numComments={commentsNum}
               />
               <span className={styles['post-date']}>
                 {formatDate(post.postedAt)}
@@ -108,21 +141,43 @@ function PostModal({ postId, close }) {
               ) : comments.length === 0 ? (
                 <p className={styles['no-comments-msg']}>No comments yet.</p>
               ) : (
-                comments.map((comment) => {
-                  return (
-                    <div key={comment.id} className={styles.comment}>
-                      <span className={styles['comment-author']}>
-                        {comment.author.username}
-                      </span>
-                      <p className={styles['comment-content']}>
-                        {comment.text}
-                      </p>
-                      <span className={styles['comment-date']}>
-                        {formatDate(comment.commentedAt)}
-                      </span>
-                    </div>
-                  );
-                })
+                <>
+                  <form className={styles['add-comment-form']}>
+                    <textarea
+                      className={styles['comment-input']}
+                      name="comment"
+                      placeholder="Add a comment..."
+                      value={commentInput}
+                      onChange={handleCommentInput}
+                    ></textarea>
+                    <button
+                      type="button"
+                      className={styles['send-comment-btn']}
+                      onClick={sendComment}
+                    >
+                      <img
+                        src="/public/icons/send-comment.png"
+                        alt="send comment"
+                        className={styles['send-icon']}
+                      />
+                    </button>
+                  </form>
+                  {comments.map((comment) => {
+                    return (
+                      <div key={comment.id} className={styles.comment}>
+                        <span className={styles['comment-author']}>
+                          {comment.author.username}
+                        </span>
+                        <p className={styles['comment-content']}>
+                          {comment.text}
+                        </p>
+                        <span className={styles['comment-date']}>
+                          {formatDate(comment.commentedAt)}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </>
               )}
             </div>
           </>
