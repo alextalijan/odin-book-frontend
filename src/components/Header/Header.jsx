@@ -4,7 +4,7 @@ import UserContext from '../../contexts/UserContext';
 import styles from './Header.module.css';
 
 function Header() {
-  const { logout } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
 
   return (
     <header className={styles.header}>
@@ -21,7 +21,7 @@ function Header() {
             </Link>
           </li>
           <li className={styles['link-listing']}>
-            <Link to="/profile" className={styles.link}>
+            <Link to={`/users/${user.username}`} className={styles.link}>
               My Profile
             </Link>
           </li>

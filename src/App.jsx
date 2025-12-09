@@ -8,6 +8,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import HomePage from './components/HomePage/HomePage';
 import SearchPage from './components/SearchPage/SearchPage';
+import ProfilePage from './components/ProfilePage/ProfilePage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -67,6 +68,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="/users/:username" element={<ProfilePage />} />
             </Route>
           </Route>
         </Routes>
