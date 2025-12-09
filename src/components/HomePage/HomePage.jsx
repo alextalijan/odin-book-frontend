@@ -87,7 +87,7 @@ function HomePage() {
                   key={post.id}
                   id={post.id}
                   text={post.text}
-                  author={post.author.username}
+                  author={post.author}
                   numLikes={post._count.likes}
                   numComments={post._count.comments}
                   postedAt={post.postedAt}

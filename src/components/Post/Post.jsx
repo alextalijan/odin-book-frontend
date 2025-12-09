@@ -1,6 +1,7 @@
 import styles from './Post.module.css';
 import formatDate from '../../utils/formatDate';
 import PostStats from '../PostStats/PostStats';
+import getStorageUrl from '../../utils/getStorageUrl';
 
 function Post({
   id,
@@ -15,7 +16,20 @@ function Post({
 }) {
   return (
     <div className={styles.card}>
-      <span className={styles.author}>{author}</span>
+      <div className={styles['author-section']}>
+        <div className={styles['avatar-container']}>
+          <img
+            className={styles.avatar}
+            src={
+              author.hasAvatar
+                ? getStorageUrl('avatar', author.id)
+                : getStorageUrl('avatar', 'default')
+            }
+            alt="avatar"
+          />
+        </div>
+        <span className={styles.author}>{author.username}</span>
+      </div>
       <p className={styles.content}>{text}</p>
       <div className={styles['post-footer']}>
         <PostStats
