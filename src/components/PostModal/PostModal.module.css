@@ -68,11 +68,34 @@
   animation-iteration-count: infinite;
 }
 
+.author-section {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.avatar-container {
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .author {
   font-size: 1.5rem;
   font-weight: 600;
   opacity: 1;
   margin-bottom: 0.4rem;
+  position: relative;
+  top: 3px;
 }
 
 .content {
@@ -180,8 +203,30 @@
   border-bottom: 1px solid var(--border);
 }
 
+.comment-author-section {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.commenter-avatar-container {
+  width: 25px;
+  height: 25px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.commenter-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .comment-author {
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
 .comment-content {

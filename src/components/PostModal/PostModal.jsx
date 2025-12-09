@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import styles from './PostModal.module.css';
 import PostStats from '../PostStats/PostStats';
 import formatDate from '../../utils/formatDate';
+import getStorageUrl from '../../utils/getStorageUrl';
 
 function PostModal({ postId, close }) {
   const [post, setPost] = useState(null);
@@ -115,7 +116,20 @@ function PostModal({ postId, close }) {
           <span className={styles.error}>{postError}</span>
         ) : (
           <>
-            <span className={styles.author}>{post.author.username}</span>
+            <div className={styles['author-section']}>
+              <div className={styles['avatar-container']}>
+                <img
+                  className={styles.avatar}
+                  src={
+                    post.author.hasAvatar
+                      ? getStorageUrl('avatar', post.author.id)
+                      : getStorageUrl('avatar', 'default')
+                  }
+                  alt="avatar"
+                />
+              </div>
+              <span className={styles.author}>{post.author.username}</span>
+            </div>
             <p className={styles.content}>{post.text}</p>
             <div className={styles['post-footer']}>
               <PostStats
@@ -166,9 +180,22 @@ function PostModal({ postId, close }) {
                   {comments.map((comment) => {
                     return (
                       <div key={comment.id} className={styles.comment}>
-                        <span className={styles['comment-author']}>
-                          {comment.author.username}
-                        </span>
+                        <div className={styles['comment-author-section']}>
+                          <div className={styles['commenter-avatar-container']}>
+                            <img
+                              className={styles['commenter-avatar']}
+                              src={
+                                comment.author.hasAvatar
+                                  ? getStorageUrl('avatar', comment.author.id)
+                                  : getStorageUrl('avatar', 'default')
+                              }
+                              alt="avatar"
+                            />
+                          </div>
+                          <span className={styles['comment-author']}>
+                            {comment.author.username}
+                          </span>
+                        </div>
                         <p className={styles['comment-content']}>
                           {comment.text}
                         </p>
