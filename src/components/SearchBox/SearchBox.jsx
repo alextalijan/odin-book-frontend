@@ -1,5 +1,6 @@
 import styles from './SearchBox.module.css';
 import { useState } from 'react';
+import getStorageUrl from '../../utils/getStorageUrl';
 
 function SearchBox({ accounts, refreshSearch }) {
   const [unfollowModal, setUnfollowModal] = useState(false);
@@ -81,6 +82,17 @@ function SearchBox({ accounts, refreshSearch }) {
           accounts.map((account) => {
             return (
               <li key={account.id} className={styles.listing}>
+                <div className={styles['avatar-container']}>
+                  <img
+                    className={styles.avatar}
+                    src={
+                      account.hasAvatar
+                        ? getStorageUrl('avatar', account.id)
+                        : getStorageUrl('avatar', 'default')
+                    }
+                    alt="avatar"
+                  />
+                </div>
                 <span className={styles.username}>{account.username}</span>
                 <button
                   type="button"
