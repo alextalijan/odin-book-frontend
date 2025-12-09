@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 function SearchBox({ accounts, refreshSearch }) {
   const [unfollowModal, setUnfollowModal] = useState(false);
+  const [cancelRequestModal, setCancelRequestModal] = useState(false);
   const [accountToUnfollow, setAccountToUnfollow] = useState(null);
 
   // Function that opens the unfollow modal
@@ -11,8 +12,26 @@ function SearchBox({ accounts, refreshSearch }) {
     setUnfollowModal(true);
   }
 
+  function triggerCancelRequestModal(account) {
+    setAccountToUnfollow(account);
+    setCancelRequestModal(true);
+  }
+
   // Function that sends a follow request to the server
-  function sendFollowRequest(accountId) {}
+  function sendFollowRequest(accountId) {
+    fetch(import.meta.env.VITE_API + `/users/${accountId}/follow-requests`, {
+      method: 'POST',
+      credentials: 'include',
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (!json.success) {
+          return alert(json.message);
+        }
+
+        refreshSearch();
+      });
+  }
 
   // Function that deletes the user from account's followers
   function unfollow(accountId) {
@@ -35,6 +54,24 @@ function SearchBox({ accounts, refreshSearch }) {
       .catch((err) => alert(err.message));
   }
 
+  function cancelRequest(accountId) {
+    fetch(import.meta.env.VITE_API + `/users/${accountId}/follow-requests`, {
+      method: 'PUT',
+      credentials: 'include',
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (!json.success) {
+          return alert(json.message);
+        }
+
+        // Close the modal and refresh search
+        refreshSearch();
+        setCancelRequestModal(false);
+      })
+      .catch((err) => alert(err.message));
+  }
+
   return (
     <>
       <ul className={styles.container}>
@@ -48,17 +85,23 @@ function SearchBox({ accounts, refreshSearch }) {
                 <button
                   type="button"
                   className={
-                    account.isFollowed
+                    account.isFollowed || account.requestSent
                       ? `${styles.btn} ${styles['unfollow-btn']}`
                       : `${styles.btn} ${styles['follow-btn']}`
                   }
                   onClick={
-                    account.isFollowed
-                      ? () => triggerUnfollowModal(account)
-                      : () => sendFollowRequest(account.id)
+                    account.requestSent
+                      ? () => triggerCancelRequestModal(account)
+                      : account.isFollowed
+                        ? () => triggerUnfollowModal(account)
+                        : () => sendFollowRequest(account.id)
                   }
                 >
-                  {!account.isFollowed && 'Follow'}
+                  {account.requestSent
+                    ? 'Requested'
+                    : !account.isFollowed
+                      ? 'Follow'
+                      : 'Following'}
                 </button>
               </li>
             );
@@ -87,6 +130,36 @@ function SearchBox({ accounts, refreshSearch }) {
                 onClick={() => {
                   setAccountToUnfollow(null);
                   setUnfollowModal(false);
+                }}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+      {cancelRequestModal && (
+        <>
+          <div className={styles['modal-backdrop']}></div>
+          <div className={styles['unfollow-modal']}>
+            <span className={styles['modal-question']}>
+              Are you sure you want to cancel request to{' '}
+              <b>{accountToUnfollow.username}</b>?
+            </span>
+            <div className={styles['modal-btns']}>
+              <button
+                type="button"
+                className={`${styles['modal-btn']} ${styles['modal-unfollow-btn']}`}
+                onClick={() => cancelRequest(accountToUnfollow.id)}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className={`${styles['modal-btn']} ${styles['modal-no-btn']}`}
+                onClick={() => {
+                  setAccountToUnfollow(null);
+                  setCancelRequestModal(false);
                 }}
               >
                 No
