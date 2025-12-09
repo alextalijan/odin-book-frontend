@@ -77,6 +77,7 @@ function RegisterPage() {
           value={username}
           onChange={handleInputChange}
           className={styles.input}
+          autoComplete="off"
         />
 
         <label htmlFor={passwordId} className={styles.label}>
