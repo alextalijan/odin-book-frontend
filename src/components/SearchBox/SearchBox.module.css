@@ -1,0 +1,66 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  grid-auto-rows: 55px;
+  width: 100%;
+  list-style-type: none;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background-color: var(--card-background);
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.no-accounts-msg {
+  justify-self: center;
+  font-size: 1.2rem;
+  opacity: 0.8;
+  cursor: default;
+}
+
+.listing {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  align-items: center;
+}
+
+.listing:last-child {
+  border-bottom: none;
+}
+
+.username {
+  opacity: 0.9;
+}
+
+.btn {
+  font-size: 1.1rem;
+  width: 100px;
+  padding: 0.5rem 0;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+  background-color: var(--btn-secondary);
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.follow-btn {
+  background-color: var(--btn);
+  color: white;
+}
+
+.unfollow-btn::after {
+  content: 'Following';
+}
+
+.unfollow-btn:hover::after {
+  content: 'Unfollow';
+}
