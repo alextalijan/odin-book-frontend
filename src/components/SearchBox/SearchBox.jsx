@@ -1,6 +1,7 @@
 import styles from './SearchBox.module.css';
 import { useState } from 'react';
 import getStorageUrl from '../../utils/getStorageUrl';
+import { Link } from 'react-router-dom';
 
 function SearchBox({ accounts, refreshSearch }) {
   const [unfollowModal, setUnfollowModal] = useState(false);
@@ -93,7 +94,12 @@ function SearchBox({ accounts, refreshSearch }) {
                     alt="avatar"
                   />
                 </div>
-                <span className={styles.username}>{account.username}</span>
+                <Link
+                  to={`/users/${account.username}`}
+                  className={styles.username}
+                >
+                  {account.username}
+                </Link>
                 <button
                   type="button"
                   className={

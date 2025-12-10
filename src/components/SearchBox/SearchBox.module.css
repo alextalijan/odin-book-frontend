@@ -50,6 +50,14 @@
 
 .username {
   opacity: 0.9;
+  transition: transform 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.username:hover {
+  transform: scale(1.05);
 }
 
 .btn {
