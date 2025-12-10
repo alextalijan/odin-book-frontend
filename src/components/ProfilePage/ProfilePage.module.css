@@ -1,0 +1,126 @@
+@keyframes loading {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-icon {
+  width: 200px;
+  animation-name: loading;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+.error {
+  color: var(--error);
+  margin-top: 15rem;
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.account-name {
+  display: flex;
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.3rem;
+  align-items: center;
+}
+
+.avatar-container {
+  width: 90px;
+  height: 90px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.username {
+  font-size: 3.5rem;
+}
+
+.account-stats {
+  padding: 1rem;
+  width: max-content;
+  display: flex;
+  gap: 1.3rem;
+  margin: 2rem auto;
+  border: 1px solid var(--border);
+  background-color: var(--card-background);
+}
+
+.following-btn {
+  font-size: 1.5rem;
+  border: none;
+  background-color: transparent;
+  transition: transform 0.3s;
+}
+
+.following-btn:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.unfollow-btn,
+.follow-btn {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.unfollow-btn:hover,
+.follow-btn:hover {
+  transform: scale(1.05);
+}
+
+.unfollow-btn {
+  background-color: var(--btn-secondary);
+}
+
+.follow-btn {
+  background-color: var(--btn);
+  color: white;
+}
+
+.follow-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.follow-msg {
+  text-align: center;
+  font-size: 1.3rem;
+  opacity: 0.7;
+}
+
+.lock-icon {
+  width: 25px;
+  opacity: 0.85;
+}
+
+.posts-heading {
+  font-size: 3rem;
+  margin-top: 4rem;
+  text-align: center;
+}
