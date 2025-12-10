@@ -54,15 +54,37 @@
   font-size: 3.5rem;
 }
 
+.account-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  gap: 1rem;
+}
+
 .account-stats {
   padding: 1rem;
   width: max-content;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin: 2rem auto;
   border: 1px solid var(--border);
   background-color: var(--card-background);
+}
+
+.requests-btn {
+  font-size: 1.5rem;
+  font-family: inherit;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background-color: var(--btn-secondary);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.requests-btn:hover {
+  transform: scale(1.05);
 }
 
 .account-posts {

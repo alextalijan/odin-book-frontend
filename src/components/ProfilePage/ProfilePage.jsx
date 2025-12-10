@@ -117,29 +117,37 @@ function ProfilePage() {
             </div>
             <h1 className={styles.username}>{username}</h1>
           </div>
-          <div className={styles['account-stats']}>
-            <span className={styles['account-posts']}>
-              <b>{account._count.posts}</b>&nbsp; posts
-            </span>
-            <button className={styles['following-btn']} type="button">
-              <b>{account._count.followers}</b>&nbsp; followers
-            </button>
-            <button className={styles['following-btn']} type="button">
-              <b>{account._count.following}</b>&nbsp; following
-            </button>
-            {account.username !== user.username && (
-              <button
-                className={
-                  account.isFollowed
-                    ? styles['unfollow-btn']
-                    : styles['follow-btn']
-                }
-              >
-                {account.isFollowed
-                  ? 'Following'
-                  : account.requestSent
-                    ? 'Requested'
-                    : 'Follow'}
+          <div className={styles['account-section']}>
+            <div className={styles['account-stats']}>
+              <span className={styles['account-posts']}>
+                <b>{account._count.posts}</b>&nbsp; posts
+              </span>
+              <button className={styles['following-btn']} type="button">
+                <b>{account._count.followers}</b>&nbsp; followers
+              </button>
+              <button className={styles['following-btn']} type="button">
+                <b>{account._count.following}</b>&nbsp; following
+              </button>
+              {account.username !== user.username && (
+                <button
+                  className={
+                    account.isFollowed
+                      ? styles['unfollow-btn']
+                      : styles['follow-btn']
+                  }
+                >
+                  {account.isFollowed
+                    ? 'Following'
+                    : account.requestSent
+                      ? 'Requested'
+                      : 'Follow'}
+                </button>
+              )}
+            </div>
+            {account.id === user.id && (
+              <button className={styles['requests-btn']}>
+                <b>{account._count.incomingRequests}</b>&nbsp; follow{' '}
+                {account._count.incomingRequests === 1 ? 'request' : 'requests'}
               </button>
             )}
           </div>
