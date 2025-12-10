@@ -94,6 +94,7 @@ function HomePage() {
                   comments={post.comments}
                   isLiked={post.isLiked}
                   open={() => setOpenPostId(post.id)}
+                  includeAccountLink={true}
                 />
               );
             })}

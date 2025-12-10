@@ -2,6 +2,7 @@ import styles from './Post.module.css';
 import formatDate from '../../utils/formatDate';
 import PostStats from '../PostStats/PostStats';
 import getStorageUrl from '../../utils/getStorageUrl';
+import { Link } from 'react-router-dom';
 
 function Post({
   id,
@@ -13,6 +14,7 @@ function Post({
   comments,
   isLiked,
   open,
+  includeAccountLink = false,
 }) {
   return (
     <div className={styles.card}>
@@ -28,7 +30,18 @@ function Post({
             alt="avatar"
           />
         </div>
-        <span className={styles.author}>{author.username}</span>
+        {includeAccountLink ? (
+          <Link
+            to={`/users/${author.username}`}
+            className={`${styles.author} ${styles.link}`}
+          >
+            {author.username}
+          </Link>
+        ) : (
+          <span to={`/users/${author.username}`} className={styles.author}>
+            {author.username}
+          </span>
+        )}
       </div>
       <p className={styles.content}>{text}</p>
       <div className={styles['post-footer']}>
@@ -51,7 +64,15 @@ function Post({
               return (
                 <li key={comment.id} className={styles.comment}>
                   <span>
-                    <b>{comment.author.username}</b> : {comment.text}
+                    <b>
+                      <Link
+                        className={styles['commenter-link']}
+                        to={`/users/${comment.author.username}`}
+                      >
+                        {comment.author.username}
+                      </Link>
+                    </b>{' '}
+                    : {comment.text}
                   </span>
                 </li>
               );

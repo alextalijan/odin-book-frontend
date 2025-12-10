@@ -36,6 +36,18 @@
   margin-bottom: 0.3rem;
   position: relative;
   top: 3px;
+  cursor: default;
+}
+
+.link {
+  transition: transform 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.link:hover {
+  transform: scale(1.05);
 }
 
 .content {
@@ -96,10 +108,22 @@
   padding: 1rem;
 }
 
+.comment:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
 .comment > span {
   opacity: 0.9;
 }
 
-.comment:last-child {
-  border-bottom: 1px solid var(--border);
+.commenter-link {
+  transition: transform 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
+.commenter-link:hover {
+  transform: scale(1.05);
 }
