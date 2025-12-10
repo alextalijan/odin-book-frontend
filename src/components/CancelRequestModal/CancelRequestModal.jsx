@@ -1,11 +1,6 @@
 import styles from './CancelRequestModal.module.css';
 
-function CancelRequestModal({
-  accountToCancel,
-  clearAccountToCancel,
-  refreshSearch,
-  closeModal,
-}) {
+function CancelRequestModal({ accountToCancel, refreshSearch, closeModal }) {
   // Function that cancels a follow request
   function cancelRequest() {
     fetch(
@@ -47,10 +42,7 @@ function CancelRequestModal({
           <button
             type="button"
             className={`${styles['modal-btn']} ${styles['modal-no-btn']}`}
-            onClick={() => {
-              clearAccountToCancel();
-              closeModal();
-            }}
+            onClick={closeModal}
           >
             No
           </button>

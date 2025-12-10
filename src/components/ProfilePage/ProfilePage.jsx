@@ -5,6 +5,7 @@ import getStorageUrl from '../../utils/getStorageUrl';
 import UserContext from '../../contexts/UserContext';
 import Post from '../Post/Post';
 import PostModal from '../PostModal/PostModal';
+import FollowingsModal from '../FollowingsModal/FollowingsModal';
 
 function ProfilePage() {
   const { user } = useContext(UserContext);
@@ -18,6 +19,8 @@ function ProfilePage() {
   const pageNum = useRef(1);
   const [openPostId, setOpenPostId] = useState(null);
   const [loadPosts, setLoadPosts] = useState(false);
+  const [followingModalOpen, setFollowingModalOpen] = useState(false);
+  const [followingModalShow, setFollowingModalShow] = useState(null);
 
   // Fetch info about the account
   useEffect(() => {
@@ -103,6 +106,13 @@ function ProfilePage() {
         <p className={styles.error}>{accountError}</p>
       ) : (
         <>
+          {(account.isFollowed || account.id === user.id) &&
+            followingModalOpen && (
+              <FollowingsModal
+                accountId={account.id}
+                show={followingModalShow}
+              />
+            )}
           <div className={styles['account-name']}>
             <div className={styles['avatar-container']}>
               <img

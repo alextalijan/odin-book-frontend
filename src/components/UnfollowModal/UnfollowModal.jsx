@@ -1,11 +1,6 @@
 import styles from './UnfollowModal.module.css';
 
-function UnfollowModal({
-  accountToUnfollow,
-  clearAccountToUnfollow,
-  refreshSearch,
-  closeModal,
-}) {
+function UnfollowModal({ accountToUnfollow, refreshSearch, closeModal }) {
   // Function that deletes the user from account's followers
   function unfollow() {
     fetch(
@@ -48,10 +43,7 @@ function UnfollowModal({
           <button
             type="button"
             className={`${styles['modal-btn']} ${styles['modal-no-btn']}`}
-            onClick={() => {
-              clearAccountToUnfollow();
-              closeModal();
-            }}
+            onClick={closeModal}
           >
             No
           </button>
