@@ -98,6 +98,17 @@
   top: 3px;
 }
 
+.link {
+  transition: transform 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.link:hover {
+  transform: scale(1.05);
+}
+
 .content {
   font-size: 1.8rem;
   opacity: 0.8;
@@ -227,6 +238,14 @@
 .comment-author {
   font-weight: bold;
   font-size: 1.1rem;
+  transition: transform 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.comment-author:hover {
+  transform: scale(1.05);
 }
 
 .comment-content {

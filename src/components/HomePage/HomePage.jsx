@@ -100,7 +100,11 @@ function HomePage() {
             })}
           </div>
           {openPostId && (
-            <PostModal postId={openPostId} close={() => setOpenPostId(null)} />
+            <PostModal
+              postId={openPostId}
+              close={() => setOpenPostId(null)}
+              includeAccountLink={true}
+            />
           )}
         </>
       )}

@@ -3,8 +3,9 @@ import styles from './PostModal.module.css';
 import PostStats from '../PostStats/PostStats';
 import formatDate from '../../utils/formatDate';
 import getStorageUrl from '../../utils/getStorageUrl';
+import { Link } from 'react-router-dom';
 
-function PostModal({ postId, close }) {
+function PostModal({ postId, close, includeAccountLink = false }) {
   const [post, setPost] = useState(null);
   const [loadingPost, setLoadingPost] = useState(true);
   const [postError, setPostError] = useState(null);
@@ -128,7 +129,16 @@ function PostModal({ postId, close }) {
                   alt="avatar"
                 />
               </div>
-              <span className={styles.author}>{post.author.username}</span>
+              {includeAccountLink ? (
+                <Link
+                  to={`/users/${post.author.username}`}
+                  className={`${styles.author} ${styles.link}`}
+                >
+                  {post.author.username}
+                </Link>
+              ) : (
+                <span className={styles.author}>{post.author.username}</span>
+              )}
             </div>
             <p className={styles.content}>{post.text}</p>
             <div className={styles['post-footer']}>
@@ -192,9 +202,12 @@ function PostModal({ postId, close }) {
                               alt="avatar"
                             />
                           </div>
-                          <span className={styles['comment-author']}>
+                          <Link
+                            to={`/users/${comment.author.username}`}
+                            className={styles['comment-author']}
+                          >
                             {comment.author.username}
-                          </span>
+                          </Link>
                         </div>
                         <p className={styles['comment-content']}>
                           {comment.text}
