@@ -35,7 +35,7 @@ function ProfilePage() {
       })
       .catch((err) => setAccountError(err.message))
       .finally(() => setLoadingAccount(false));
-  }, []);
+  }, [username]);
 
   // Fetch the posts of the account
   useEffect(() => {
