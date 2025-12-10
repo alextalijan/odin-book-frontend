@@ -17,7 +17,7 @@ function ProfilePage() {
   const [postsError, setPostsError] = useState(null);
   const pageNum = useRef(1);
   const [openPostId, setOpenPostId] = useState(null);
-  const [loadPosts, setLoadposts] = useState(false);
+  const [loadPosts, setLoadPosts] = useState(false);
 
   // Fetch info about the account
   useEffect(() => {
@@ -118,11 +118,14 @@ function ProfilePage() {
             <h1 className={styles.username}>{username}</h1>
           </div>
           <div className={styles['account-stats']}>
+            <span className={styles['account-posts']}>
+              <b>{account._count.posts}</b>&nbsp; posts
+            </span>
             <button className={styles['following-btn']} type="button">
-              {account._count.followers} followers
+              <b>{account._count.followers}</b>&nbsp; followers
             </button>
             <button className={styles['following-btn']} type="button">
-              {account._count.following} following
+              <b>{account._count.following}</b>&nbsp; following
             </button>
             {account.username !== user.username && (
               <button

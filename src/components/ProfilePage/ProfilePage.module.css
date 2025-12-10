@@ -58,10 +58,16 @@
   padding: 1rem;
   width: max-content;
   display: flex;
-  gap: 1.3rem;
+  align-items: center;
+  gap: 1.5rem;
   margin: 2rem auto;
   border: 1px solid var(--border);
   background-color: var(--card-background);
+}
+
+.account-posts {
+  font-size: 1.5rem;
+  cursor: default;
 }
 
 .following-btn {
@@ -69,6 +75,7 @@
   border: none;
   background-color: transparent;
   transition: transform 0.3s;
+  font-family: inherit;
 }
 
 .following-btn:hover {
