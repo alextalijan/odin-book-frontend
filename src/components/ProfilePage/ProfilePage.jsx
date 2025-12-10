@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom';
 import styles from './ProfilePage.module.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import getStorageUrl from '../../utils/getStorageUrl';
 import UserContext from '../../contexts/UserContext';
 import Post from '../Post/Post';
+import PostModal from '../PostModal/PostModal';
 
 function ProfilePage() {
   const { user } = useContext(UserContext);
@@ -14,6 +15,9 @@ function ProfilePage() {
   const [posts, setPosts] = useState(null);
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [postsError, setPostsError] = useState(null);
+  const pageNum = useRef(1);
+  const [openPostId, setOpenPostId] = useState(null);
+  const [loadPosts, setLoadposts] = useState(false);
 
   // Fetch info about the account
   useEffect(() => {
@@ -34,11 +38,57 @@ function ProfilePage() {
   }, []);
 
   // Fetch the posts of the account
-  // useEffect(() => {
-  //   fetch(import.meta.env.VITE_API + '/users/:username/posts', {
-  //     method: 'GET',
-  //   })
-  // }, [account]);
+  useEffect(() => {
+    // If there is not account
+    // Or the account is not followed
+    // Or the account is not the user
+    if (
+      !account ||
+      (!account.isFollowed && account.username !== user.username)
+    ) {
+      // Don't fetch anything
+      return;
+    }
+
+    fetch(
+      import.meta.env.VITE_API +
+        `/users/${account.id}/posts?page=${pageNum.current}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
+      .then((response) => response.json())
+      .then((json) => {
+        if (!json.success) {
+          return setPostsError(json.message);
+        }
+
+        setPosts(json.posts);
+      })
+      .catch((err) => setPostsError(err.message))
+      .finally(() => setLoadingPosts(false));
+  }, [account, loadPosts]);
+
+  // If the scroll has reached the bottom, trigger loading more posts
+  useEffect(() => {
+    if (!window) return;
+
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      if (scrollTop + windowHeight >= docHeight - 5) {
+        pageNum.current += 1;
+        setLoadPosts((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
@@ -104,24 +154,47 @@ function ProfilePage() {
           ) : (
             <>
               <h2 className={styles['posts-heading']}>Posts</h2>
-              <div className={styles['posts']}>
-                {/* {posts.map((post) => {
-                  return (
-                    <Post
-                      key={post.id}
-                      id={post.id}
-                      text={post.text}
-                      author={post.author}
-                      numLikes={post._count.likes}
-                      numComments={post._count.comments}
-                      postedAt={post.postedAt}
-                      comments={post.comments}
-                      isLiked={post.isLiked}
-                      open={() => setOpenPostId(post.id)}
+              {loadingPosts ? (
+                <div className={styles['posts-loading-container']}>
+                  <img
+                    className={styles['posts-loading-icon']}
+                    src="/public/icons/loading-icon.png"
+                  />
+                </div>
+              ) : postsError ? (
+                <p className={styles['posts-error']}>{postsError}</p>
+              ) : posts.length === 0 ? (
+                <p className={styles['no-posts-msg']}>
+                  This account doesn't have any posts.
+                </p>
+              ) : (
+                <>
+                  <div className={styles['posts']}>
+                    {posts.map((post) => {
+                      return (
+                        <Post
+                          key={post.id}
+                          id={post.id}
+                          text={post.text}
+                          author={post.author}
+                          numLikes={post._count.likes}
+                          numComments={post._count.comments}
+                          postedAt={post.postedAt}
+                          comments={post.comments}
+                          isLiked={post.isLiked}
+                          open={() => setOpenPostId(post.id)}
+                        />
+                      );
+                    })}
+                  </div>
+                  {openPostId && (
+                    <PostModal
+                      postId={openPostId}
+                      close={() => setOpenPostId(null)}
                     />
-                  );
-                })} */}
-              </div>
+                  )}
+                </>
+              )}
             </>
           )}
         </>

@@ -121,6 +121,44 @@
 
 .posts-heading {
   font-size: 3rem;
-  margin-top: 4rem;
+  margin-top: 3rem;
+  margin-bottom: 2.5rem;
   text-align: center;
+}
+
+.posts-loading-container {
+  display: flex;
+  justify-content: center;
+  margin: 4rem auto;
+}
+
+.posts-loading-icon {
+  display: inline-block;
+  width: 100px;
+  animation-name: loading;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+.posts-error {
+  color: var(--error);
+  text-align: center;
+  margin-top: 2.5rem;
+  font-size: 1.1rem;
+  opacity: 0.75;
+}
+
+.no-posts-msg {
+  font-size: 1.2rem;
+  opacity: 0.6;
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem auto;
 }
