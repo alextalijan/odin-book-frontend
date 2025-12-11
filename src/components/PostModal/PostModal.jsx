@@ -4,6 +4,7 @@ import PostStats from '../PostStats/PostStats';
 import formatDate from '../../utils/formatDate';
 import getStorageUrl from '../../utils/getStorageUrl';
 import { Link } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 
 function PostModal({ postId, close, includeAccountLink = false }) {
   const [post, setPost] = useState(null);
@@ -103,7 +104,7 @@ function PostModal({ postId, close, includeAccountLink = false }) {
       .catch((err) => alert(err.message));
   };
 
-  return (
+  return createPortal(
     <>
       <div className={styles.backdrop} onClick={close}></div>
       <div className={styles.post} onScroll={handleScroll}>
@@ -224,7 +225,8 @@ function PostModal({ postId, close, includeAccountLink = false }) {
           </>
         )}
       </div>
-    </>
+    </>,
+    document.getElementById('modal-root')
   );
 }
 

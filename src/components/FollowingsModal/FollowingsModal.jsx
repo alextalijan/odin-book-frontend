@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import styles from './FollowingsModal.module.css';
-import AccountListing from '../AccountListing/AccountListing';
+import AccountList from '../AccountList/AccountList';
+import { createPortal } from 'react-dom';
 
-function FollowingsModal({ accountId, show }) {
+function FollowingsModal({ accountId, show, closeModal }) {
   const [followers, setFollowers] = useState(null);
   const [loadingFollowers, setLoadingFollowers] = useState(true);
   const [followersError, setFollowersError] = useState(null);
   const [followings, setFollowings] = useState(null);
   const [loadingFollowings, setLoadingFollowings] = useState(true);
   const [followingsError, setFollowingsError] = useState(null);
+  const [showState, setShowState] = useState(show);
+  const [reloadFollowers, setReloadFollowers] = useState(false);
+  const [reloadFollowings, setReloadFollowings] = useState(false);
 
   // Fetch the list of followers
   useEffect(() => {
@@ -26,7 +30,7 @@ function FollowingsModal({ accountId, show }) {
       })
       .catch((err) => setFollowersError(err.message))
       .finally(() => setLoadingFollowers(false));
-  }, []);
+  }, [accountId, reloadFollowers]);
 
   // Fetch the list of followings
   useEffect(() => {
@@ -40,38 +44,80 @@ function FollowingsModal({ accountId, show }) {
           return setFollowingsError(json.message);
         }
 
-        setFollowings(json.followers);
+        setFollowings(json.followings);
       })
       .catch((err) => setFollowingsError(err.message))
       .finally(() => setLoadingFollowings(false));
-  }, []);
+  }, [accountId, reloadFollowings]);
 
-  return (
+  return createPortal(
     <>
-      <div className={styles.backdrop}></div>
+      <div className={styles.backdrop} onClick={closeModal}></div>
       <div className={styles.modal}>
         <div className={styles.header}>
-          <button>Followers</button>
-          <button>Following</button>
+          <button
+            className={
+              showState === 'followers'
+                ? `${styles['header-btn']} ${styles['active-header-btn']}`
+                : styles['header-btn']
+            }
+            onClick={() => setShowState('followers')}
+          >
+            {followers && followers.length} Followers
+          </button>
+          <button
+            className={
+              showState === 'following'
+                ? `${styles['header-btn']} ${styles['active-header-btn']}`
+                : styles['header-btn']
+            }
+            onClick={() => setShowState('following')}
+          >
+            {followings && followings.length} Following
+          </button>
         </div>
-        <hr />
-        <ul className={styles['accounts-list']}>
-          {show === 'followers' ? (
-            loadingFollowers ? (
-              <img src="/public/icons/loading-icon.png" />
-            ) : followersError ? (
-              <p>{followersError}</p>
-            ) : (
-              followers.map((follower) => {
-                return <li key={follower.id}></li>;
-              })
-            )
+        {showState === 'followers' ? (
+          loadingFollowers ? (
+            <div className={styles['loading-container']}>
+              <img
+                className={styles['loading-icon']}
+                src="/public/icons/loading-icon.png"
+              />
+            </div>
+          ) : followersError ? (
+            <span className={styles.error}>{followersError}</span>
           ) : (
-            show === 'following'
-          )}
-        </ul>
+            <div className={styles['accounts-list']}>
+              <AccountList
+                accounts={followers}
+                refreshList={() => setReloadFollowers((prev) => !prev)}
+              />
+            </div>
+          )
+        ) : showState === 'following' ? (
+          loadingFollowings ? (
+            <div className={styles['loading-container']}>
+              <img
+                className={styles['loading-icon']}
+                src="/public/icons/loading-icon.png"
+              />
+            </div>
+          ) : followingsError ? (
+            <span className={styles.error}>{followingsError}</span>
+          ) : (
+            <div className={styles['accounts-list']}>
+              <AccountList
+                accounts={followings}
+                refreshList={() => setReloadFollowings((prev) => !prev)}
+              />
+            </div>
+          )
+        ) : (
+          <li>Invalid Request</li>
+        )}
       </div>
-    </>
+    </>,
+    document.getElementById('modal-root')
   );
 }
 

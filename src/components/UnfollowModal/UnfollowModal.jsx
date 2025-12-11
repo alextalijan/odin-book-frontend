@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import styles from './UnfollowModal.module.css';
 
 function UnfollowModal({ accountToUnfollow, refreshList, closeModal }) {
@@ -25,7 +26,7 @@ function UnfollowModal({ accountToUnfollow, refreshList, closeModal }) {
       .catch((err) => alert(err.message));
   }
 
-  return (
+  return createPortal(
     <>
       <div className={styles['modal-backdrop']}></div>
       <div className={styles['unfollow-modal']}>
@@ -49,7 +50,8 @@ function UnfollowModal({ accountToUnfollow, refreshList, closeModal }) {
           </button>
         </div>
       </div>
-    </>
+    </>,
+    document.getElementById('modal-root')
   );
 }
 

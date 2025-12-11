@@ -111,6 +111,7 @@ function ProfilePage() {
               <FollowingsModal
                 accountId={account.id}
                 show={followingModalShow}
+                closeModal={() => setFollowingModalOpen(false)}
               />
             )}
           <div className={styles['account-name']}>
@@ -132,10 +133,24 @@ function ProfilePage() {
               <span className={styles['account-posts']}>
                 <b>{account._count.posts}</b>&nbsp; posts
               </span>
-              <button className={styles['following-btn']} type="button">
+              <button
+                className={styles['following-btn']}
+                type="button"
+                onClick={() => {
+                  setFollowingModalOpen(true);
+                  setFollowingModalShow('followers');
+                }}
+              >
                 <b>{account._count.followers}</b>&nbsp; followers
               </button>
-              <button className={styles['following-btn']} type="button">
+              <button
+                className={styles['following-btn']}
+                type="button"
+                onClick={() => {
+                  setFollowingModalOpen(true);
+                  setFollowingModalShow('following');
+                }}
+              >
                 <b>{account._count.following}</b>&nbsp; following
               </button>
               {account.username !== user.username && (

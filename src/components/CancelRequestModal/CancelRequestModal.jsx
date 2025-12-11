@@ -1,4 +1,5 @@
 import styles from './CancelRequestModal.module.css';
+import { createPortal } from 'react-dom';
 
 function CancelRequestModal({ accountToCancel, refreshList, closeModal }) {
   // Function that cancels a follow request
@@ -23,7 +24,7 @@ function CancelRequestModal({ accountToCancel, refreshList, closeModal }) {
       .catch((err) => alert(err.message));
   }
 
-  return (
+  return createPortal(
     <>
       <div className={styles['modal-backdrop']}></div>
       <div className={styles['cancel-modal']}>
@@ -48,7 +49,8 @@ function CancelRequestModal({ accountToCancel, refreshList, closeModal }) {
           </button>
         </div>
       </div>
-    </>
+    </>,
+    document.getElementById('modal-root')
   );
 }
 
