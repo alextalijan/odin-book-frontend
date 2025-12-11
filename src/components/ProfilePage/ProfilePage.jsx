@@ -73,6 +73,11 @@ function ProfilePage() {
       .finally(() => setLoadingPosts(false));
   }, [account, loadPosts]);
 
+  // When the account has changed, close the followings modal
+  useEffect(() => {
+    setFollowingModalOpen(false);
+  }, [account]);
+
   // If the scroll has reached the bottom, trigger loading more posts
   useEffect(() => {
     if (!window) return;
