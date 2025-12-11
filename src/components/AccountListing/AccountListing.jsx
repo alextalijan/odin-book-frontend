@@ -2,6 +2,7 @@ import styles from './AccountListing.module.css';
 import getStorageUrl from '../../utils/getStorageUrl';
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
+import sendFollowRequest from '../../utils/sendFollowRequest';
 
 // Components
 import UnfollowModal from '../UnfollowModal/UnfollowModal';
@@ -12,22 +13,6 @@ function AccountListing({ account, refreshList }) {
   const [unfollowModal, setUnfollowModal] = useState(false);
   const [cancelRequestModal, setCancelRequestModal] = useState(false);
   const { user } = useContext(UserContext);
-
-  // Function that sends a follow request to the server
-  function sendFollowRequest() {
-    fetch(import.meta.env.VITE_API + `/users/${account.id}/follow-requests`, {
-      method: 'POST',
-      credentials: 'include',
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        if (!json.success) {
-          return alert(json.message);
-        }
-
-        refreshList();
-      });
-  }
 
   return (
     <>
@@ -59,7 +44,7 @@ function AccountListing({ account, refreshList }) {
                 ? () => setCancelRequestModal(true)
                 : account.isFollowed
                   ? () => setUnfollowModal(true)
-                  : () => sendFollowRequest()
+                  : () => sendFollowRequest(account.id, refreshList)
             }
           >
             {account.requestSent

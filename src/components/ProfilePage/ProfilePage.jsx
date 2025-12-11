@@ -6,6 +6,9 @@ import UserContext from '../../contexts/UserContext';
 import Post from '../Post/Post';
 import PostModal from '../PostModal/PostModal';
 import FollowingsModal from '../FollowingsModal/FollowingsModal';
+import UnfollowModal from '../UnfollowModal/UnfollowModal';
+import CancelRequestModal from '../CancelRequestModal/CancelRequestModal';
+import sendFollowRequest from '../../utils/sendFollowRequest';
 
 function ProfilePage() {
   const { user } = useContext(UserContext);
@@ -19,6 +22,8 @@ function ProfilePage() {
   const pageNum = useRef(1);
   const [openPostId, setOpenPostId] = useState(null);
   const [loadPosts, setLoadPosts] = useState(false);
+  const [unfollowModalOpen, setUnfollowModalOpen] = useState(false);
+  const [cancelRequestModalOpen, setCancelRequestModalOpen] = useState(false);
   const [followingModalOpen, setFollowingModalOpen] = useState(false);
   const [followingModalShow, setFollowingModalShow] = useState(null);
 
@@ -159,19 +164,49 @@ function ProfilePage() {
                 <b>{account._count.following}</b>&nbsp; following
               </button>
               {account.username !== user.username && (
-                <button
-                  className={
-                    account.isFollowed
-                      ? styles['unfollow-btn']
-                      : styles['follow-btn']
-                  }
-                >
-                  {account.isFollowed
-                    ? 'Following'
-                    : account.requestSent
-                      ? 'Requested'
-                      : 'Follow'}
-                </button>
+                <>
+                  <button
+                    className={
+                      account.isFollowed || account.requestSent
+                        ? styles['unfollow-btn']
+                        : styles['follow-btn']
+                    }
+                    onClick={
+                      account.isFollowed
+                        ? () => setUnfollowModalOpen(true)
+                        : account.requestSent
+                          ? () => setCancelRequestModalOpen(true)
+                          : () =>
+                              sendFollowRequest(account.id, () =>
+                                setAccount({ ...account, requestSent: true })
+                              )
+                    }
+                  >
+                    {account.isFollowed
+                      ? 'Following'
+                      : account.requestSent
+                        ? 'Requested'
+                        : 'Follow'}
+                  </button>
+                  {unfollowModalOpen && (
+                    <UnfollowModal
+                      accountToUnfollow={account}
+                      refreshList={() =>
+                        setAccount({ ...account, isFollowed: false })
+                      }
+                      closeModal={() => setUnfollowModalOpen(false)}
+                    />
+                  )}
+                  {cancelRequestModalOpen && (
+                    <CancelRequestModal
+                      accountToCancel={account}
+                      refreshList={() =>
+                        setAccount({ ...account, requestSent: false })
+                      }
+                      closeModal={() => setCancelRequestModalOpen(false)}
+                    />
+                  )}
+                </>
               )}
             </div>
             {account.id === user.id && (

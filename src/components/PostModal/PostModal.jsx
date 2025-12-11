@@ -19,7 +19,6 @@ function PostModal({ postId, close, includeAccountLink = false }) {
   const [commentInput, setCommentInput] = useState('');
   const [refreshComments, setRefreshComments] = useState(false);
 
-  // TODO: write fetch logic for loading more comments
   // Fetch the post details
   useEffect(() => {
     fetch(import.meta.env.VITE_API + `/posts/${postId}`, {
