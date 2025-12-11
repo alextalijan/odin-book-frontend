@@ -1,9 +1,9 @@
-import styles from './SearchBox.module.css';
+import styles from './AccountList.module.css';
 
 // Components
 import AccountListing from '../AccountListing/AccountListing';
 
-function SearchBox({ accounts, refreshSearch }) {
+function AccountList({ accounts, refreshSearch }) {
   return (
     <ul className={styles.container}>
       {accounts.length === 0 ? (
@@ -19,4 +19,4 @@ function SearchBox({ accounts, refreshSearch }) {
   );
 }
 
-export default SearchBox;
+export default AccountList;

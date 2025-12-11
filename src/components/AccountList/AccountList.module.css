@@ -5,12 +5,7 @@
   grid-auto-rows: 55px;
   width: 100%;
   list-style-type: none;
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
   background-color: var(--card-background);
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
 }
 
 .no-accounts-msg {

@@ -1,6 +1,6 @@
 import styles from './SearchPage.module.css';
 import { useEffect, useState } from 'react';
-import SearchBox from '../SearchBox/SearchBox';
+import AccountList from '../AccountList/AccountList';
 
 function SearchPage() {
   const [usernameInput, setUsernameInput] = useState('');
@@ -44,10 +44,12 @@ function SearchPage() {
           autoComplete="off"
         />
         {accounts && (
-          <SearchBox
-            accounts={accounts}
-            refreshSearch={() => setRefreshSearch((prev) => !prev)}
-          />
+          <div className={styles['accounts-section']}>
+            <AccountList
+              accounts={accounts}
+              refreshSearch={() => setRefreshSearch((prev) => !prev)}
+            />
+          </div>
         )}
       </form>
     </>
