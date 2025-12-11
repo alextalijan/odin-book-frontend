@@ -7,7 +7,7 @@ import { useState } from 'react';
 import UnfollowModal from '../UnfollowModal/UnfollowModal';
 import CancelRequestModal from '../CancelRequestModal/CancelRequestModal';
 
-function AccountListing({ account, refreshSearch }) {
+function AccountListing({ account, refreshList }) {
   const [unfollowModal, setUnfollowModal] = useState(false);
   const [cancelRequestModal, setCancelRequestModal] = useState(false);
 
@@ -23,7 +23,7 @@ function AccountListing({ account, refreshSearch }) {
           return alert(json.message);
         }
 
-        refreshSearch();
+        refreshList();
       });
   }
 
@@ -69,14 +69,14 @@ function AccountListing({ account, refreshSearch }) {
       {unfollowModal && (
         <UnfollowModal
           accountToUnfollow={account}
-          refreshSearch={refreshSearch}
+          refreshList={refreshList}
           closeModal={() => setUnfollowModal(false)}
         />
       )}
       {cancelRequestModal && (
         <CancelRequestModal
           accountToCancel={account}
-          refreshSearch={refreshSearch}
+          refreshList={refreshList}
           closeModal={() => setCancelRequestModal(false)}
         />
       )}

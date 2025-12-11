@@ -47,7 +47,7 @@ function SearchPage() {
           <div className={styles['accounts-section']}>
             <AccountList
               accounts={accounts}
-              refreshSearch={() => setRefreshSearch((prev) => !prev)}
+              refreshList={() => setRefreshSearch((prev) => !prev)}
             />
           </div>
         )}

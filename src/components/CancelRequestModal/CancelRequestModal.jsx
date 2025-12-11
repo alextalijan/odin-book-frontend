@@ -1,6 +1,6 @@
 import styles from './CancelRequestModal.module.css';
 
-function CancelRequestModal({ accountToCancel, refreshSearch, closeModal }) {
+function CancelRequestModal({ accountToCancel, refreshList, closeModal }) {
   // Function that cancels a follow request
   function cancelRequest() {
     fetch(
@@ -17,7 +17,7 @@ function CancelRequestModal({ accountToCancel, refreshSearch, closeModal }) {
         }
 
         // Close the modal and refresh search
-        refreshSearch();
+        refreshList();
         closeModal();
       })
       .catch((err) => alert(err.message));

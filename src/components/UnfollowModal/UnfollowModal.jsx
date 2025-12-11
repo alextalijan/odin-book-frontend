@@ -1,6 +1,6 @@
 import styles from './UnfollowModal.module.css';
 
-function UnfollowModal({ accountToUnfollow, refreshSearch, closeModal }) {
+function UnfollowModal({ accountToUnfollow, refreshList, closeModal }) {
   // Function that deletes the user from account's followers
   function unfollow() {
     fetch(
@@ -17,7 +17,7 @@ function UnfollowModal({ accountToUnfollow, refreshSearch, closeModal }) {
         }
 
         // Trigger a reload of search
-        refreshSearch();
+        refreshList();
 
         // Close the unfollow modal
         closeModal();
