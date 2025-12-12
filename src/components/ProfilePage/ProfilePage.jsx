@@ -9,6 +9,7 @@ import FollowingsModal from '../FollowingsModal/FollowingsModal';
 import UnfollowModal from '../UnfollowModal/UnfollowModal';
 import CancelRequestModal from '../CancelRequestModal/CancelRequestModal';
 import sendFollowRequest from '../../utils/sendFollowRequest';
+import FollowRequestsModal from '../FollowRequestsModal/FollowRequestsModal';
 
 function ProfilePage() {
   const { user } = useContext(UserContext);
@@ -26,6 +27,7 @@ function ProfilePage() {
   const [cancelRequestModalOpen, setCancelRequestModalOpen] = useState(false);
   const [followingModalOpen, setFollowingModalOpen] = useState(false);
   const [followingModalShow, setFollowingModalShow] = useState(null);
+  const [requestsModalOpen, setRequestsModalOpen] = useState(false);
 
   // Fetch info about the account
   useEffect(() => {
@@ -210,10 +212,23 @@ function ProfilePage() {
               )}
             </div>
             {account.id === user.id && (
-              <button className={styles['requests-btn']}>
-                <b>{account._count.incomingRequests}</b>&nbsp; follow{' '}
-                {account._count.incomingRequests === 1 ? 'request' : 'requests'}
-              </button>
+              <>
+                <button
+                  className={styles['requests-btn']}
+                  onClick={() => setRequestsModalOpen(true)}
+                >
+                  <b>{account._count.incomingRequests}</b>&nbsp; follow{' '}
+                  {account._count.incomingRequests === 1
+                    ? 'request'
+                    : 'requests'}
+                </button>
+                {requestsModalOpen && (
+                  <FollowRequestsModal
+                    user={user}
+                    closeModal={() => setRequestsModalOpen(false)}
+                  />
+                )}
+              </>
             )}
           </div>
           {!account.isFollowed && account.username !== user.username ? (

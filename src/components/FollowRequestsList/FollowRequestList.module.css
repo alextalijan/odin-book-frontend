@@ -1,0 +1,9 @@
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  grid-auto-rows: 60;
+  width: 100%;
+  list-style-type: none;
+  background-color: var(--card-background);
+}

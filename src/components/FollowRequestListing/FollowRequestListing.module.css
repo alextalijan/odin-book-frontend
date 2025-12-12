@@ -1,0 +1,65 @@
+.listing {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  align-items: center;
+  width: 100%;
+}
+
+.listing:last-child {
+  border-bottom: none;
+}
+
+.avatar-container {
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.username {
+  opacity: 0.9;
+  transition: transform 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.username:hover {
+  transform: scale(1.05);
+}
+
+.btns {
+  margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.1rem;
+  width: 80px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.accept-btn {
+  background-color: var(--btn);
+  color: white;
+}
