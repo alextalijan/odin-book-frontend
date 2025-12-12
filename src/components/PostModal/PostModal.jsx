@@ -6,7 +6,12 @@ import getStorageUrl from '../../utils/getStorageUrl';
 import { Link } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 
-function PostModal({ postId, close, includeAccountLink = false }) {
+function PostModal({
+  postId,
+  close,
+  includeAccountLink = false,
+  refreshPosts,
+}) {
   const [post, setPost] = useState(null);
   const [loadingPost, setLoadingPost] = useState(true);
   const [postError, setPostError] = useState(null);
@@ -99,6 +104,7 @@ function PostModal({ postId, close, includeAccountLink = false }) {
         setCommentsNum((prev) => prev + 1);
         setRefreshComments((prev) => !prev);
         setCommentInput('');
+        refreshPosts();
       })
       .catch((err) => alert(err.message));
   };

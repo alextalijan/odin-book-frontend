@@ -113,6 +113,7 @@ function HomePage() {
               postId={openPostId}
               close={() => setOpenPostId(null)}
               includeAccountLink={true}
+              refreshPosts={() => setLoadPosts((prev) => !prev)}
             />
           )}
         </>
