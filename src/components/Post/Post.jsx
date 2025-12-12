@@ -44,6 +44,7 @@ function Post({
         )}
       </div>
       <p className={styles.content}>{text}</p>
+      <hr className={styles.separator} />
       <div className={styles['post-footer']}>
         <PostStats
           postId={id}

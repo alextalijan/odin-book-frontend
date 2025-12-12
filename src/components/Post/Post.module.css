@@ -2,7 +2,7 @@
   border: 2px solid var(--border);
   background-color: var(--card-background);
   padding: 1.5rem;
-  width: clamp(400px, 60%, 800px);
+  width: clamp(400px, 40%, 600px);
   gap: 2.2rem;
   display: flex;
   flex-direction: column;
@@ -16,8 +16,8 @@
 }
 
 .avatar-container {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border: 1px solid var(--border);
   border-radius: 50%;
   overflow: hidden;
@@ -31,11 +31,8 @@
 }
 
 .author {
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 0.3rem;
-  position: relative;
-  top: 3px;
   cursor: default;
 }
 
@@ -51,11 +48,13 @@
 }
 
 .content {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   opacity: 0.8;
+  margin-bottom: 1rem;
 }
 
 .post-footer {
+  margin-top: -1.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -63,7 +62,7 @@
 
 .post-date {
   opacity: 0.6;
-  font-size: 1.1rem;
+  font-size: 1rem;
   align-self: end;
   cursor: default;
 }
