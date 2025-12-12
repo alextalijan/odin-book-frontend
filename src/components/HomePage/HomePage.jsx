@@ -118,7 +118,10 @@ function HomePage() {
         </>
       )}
       {WritePostModalOpen && (
-        <WritePostModal closeModal={() => setWritePostModalOpen(false)} />
+        <WritePostModal
+          closeModal={() => setWritePostModalOpen(false)}
+          refreshPosts={() => setLoadPosts((prev) => !prev)}
+        />
       )}
     </>
   );
