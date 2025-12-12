@@ -4,6 +4,7 @@ import styles from './HomePage.module.css';
 import { useContext, useEffect, useState, useRef } from 'react';
 import Post from '../Post/Post';
 import PostModal from '../PostModal/PostModal';
+import WritePostModal from '../WritePostModal/WritePostModal';
 
 function HomePage() {
   const { user } = useContext(UserContext);
@@ -13,6 +14,7 @@ function HomePage() {
   const pageNum = useRef(1);
   const [openPostId, setOpenPostId] = useState(null);
   const [loadPosts, setLoadPosts] = useState(false);
+  const [WritePostModalOpen, setWritePostModalOpen] = useState(false);
 
   // Fetch posts from followings
   useEffect(() => {
@@ -57,6 +59,13 @@ function HomePage() {
 
   return (
     <>
+      <button
+        className={styles['write-post-btn']}
+        type="button"
+        onClick={() => setWritePostModalOpen(true)}
+      >
+        +
+      </button>
       <h1 className={styles.h1}>Feed</h1>
       {loadingPosts ? (
         <div className={styles['loading-wrapper']}>
@@ -107,6 +116,9 @@ function HomePage() {
             />
           )}
         </>
+      )}
+      {WritePostModalOpen && (
+        <WritePostModal closeModal={() => setWritePostModalOpen(false)} />
       )}
     </>
   );
