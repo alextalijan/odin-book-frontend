@@ -163,8 +163,6 @@ function PostModal({ postId, close, includeAccountLink = false }) {
                 />
               ) : commentsError ? (
                 <p className={styles['comments-error']}>{commentsError}</p>
-              ) : comments.length === 0 ? (
-                <p className={styles['no-comments-msg']}>No comments yet.</p>
               ) : (
                 <>
                   <form className={styles['add-comment-form']}>
@@ -187,37 +185,45 @@ function PostModal({ postId, close, includeAccountLink = false }) {
                       />
                     </button>
                   </form>
-                  {comments.map((comment) => {
-                    return (
-                      <div key={comment.id} className={styles.comment}>
-                        <div className={styles['comment-author-section']}>
-                          <div className={styles['commenter-avatar-container']}>
-                            <img
-                              className={styles['commenter-avatar']}
-                              src={
-                                comment.author.hasAvatar
-                                  ? getStorageUrl('avatar', comment.author.id)
-                                  : getStorageUrl('avatar', 'default')
-                              }
-                              alt="avatar"
-                            />
+                  {comments.length === 0 ? (
+                    <p className={styles['no-comments-msg']}>
+                      No comments yet.
+                    </p>
+                  ) : (
+                    comments.map((comment) => {
+                      return (
+                        <div key={comment.id} className={styles.comment}>
+                          <div className={styles['comment-author-section']}>
+                            <div
+                              className={styles['commenter-avatar-container']}
+                            >
+                              <img
+                                className={styles['commenter-avatar']}
+                                src={
+                                  comment.author.hasAvatar
+                                    ? getStorageUrl('avatar', comment.author.id)
+                                    : getStorageUrl('avatar', 'default')
+                                }
+                                alt="avatar"
+                              />
+                            </div>
+                            <Link
+                              to={`/users/${comment.author.username}`}
+                              className={styles['comment-author']}
+                            >
+                              {comment.author.username}
+                            </Link>
                           </div>
-                          <Link
-                            to={`/users/${comment.author.username}`}
-                            className={styles['comment-author']}
-                          >
-                            {comment.author.username}
-                          </Link>
+                          <p className={styles['comment-content']}>
+                            {comment.text}
+                          </p>
+                          <span className={styles['comment-date']}>
+                            {formatDate(comment.commentedAt)}
+                          </span>
                         </div>
-                        <p className={styles['comment-content']}>
-                          {comment.text}
-                        </p>
-                        <span className={styles['comment-date']}>
-                          {formatDate(comment.commentedAt)}
-                        </span>
-                      </div>
-                    );
-                  })}
+                      );
+                    })
+                  )}
                 </>
               )}
             </div>

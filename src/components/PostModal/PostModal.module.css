@@ -39,7 +39,7 @@
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   padding: 1.5rem;
-  width: clamp(500px, 65%, 900px);
+  width: clamp(350px, 60%, 650px);
   height: 65%;
   overflow-y: auto;
   gap: 2rem;
@@ -168,7 +168,7 @@
   position: relative;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -200%);
   width: max-content;
 }
 
