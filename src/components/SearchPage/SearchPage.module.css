@@ -1,7 +1,7 @@
 .h1 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   text-align: center;
-  margin-top: 10rem;
+  margin-top: 8rem;
   cursor: default;
 }
 
@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   margin: 3rem auto;
-  width: clamp(100px, 60%, 600px);
+  width: clamp(100px, 60%, 500px);
 }
 
 .username-input {

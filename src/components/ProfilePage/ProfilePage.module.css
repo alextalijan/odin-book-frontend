@@ -36,8 +36,8 @@
 }
 
 .avatar-container {
-  width: 90px;
-  height: 90px;
+  width: 70px;
+  height: 70px;
   border: 1px solid var(--border);
   border-radius: 50%;
   overflow: hidden;
@@ -51,7 +51,7 @@
 }
 
 .username {
-  font-size: 3.5rem;
+  font-size: 3rem;
 }
 
 .account-section {
@@ -73,7 +73,7 @@
 }
 
 .requests-btn {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-family: inherit;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -88,12 +88,12 @@
 }
 
 .account-posts {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: default;
 }
 
 .following-btn {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   border: none;
   background-color: transparent;
   transition: transform 0.3s;
@@ -107,7 +107,7 @@
 
 .unfollow-btn,
 .follow-btn {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: none;
@@ -149,9 +149,9 @@
 }
 
 .posts-heading {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-top: 3rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
   text-align: center;
 }
 
