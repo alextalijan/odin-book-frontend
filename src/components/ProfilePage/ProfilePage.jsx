@@ -282,6 +282,7 @@ function ProfilePage() {
                     <PostModal
                       postId={openPostId}
                       close={() => setOpenPostId(null)}
+                      refreshPosts={() => setLoadPosts((prev) => !prev)}
                     />
                   )}
                 </>
