@@ -10,6 +10,7 @@ import UnfollowModal from '../UnfollowModal/UnfollowModal';
 import CancelRequestModal from '../CancelRequestModal/CancelRequestModal';
 import sendFollowRequest from '../../utils/sendFollowRequest';
 import FollowRequestsModal from '../FollowRequestsModal/FollowRequestsModal';
+import ChangeAvatarModal from '../ChangeAvatarModal/ChangeAvatarModal';
 
 function ProfilePage() {
   const { user } = useContext(UserContext);
@@ -28,6 +29,7 @@ function ProfilePage() {
   const [followingModalOpen, setFollowingModalOpen] = useState(false);
   const [followingModalShow, setFollowingModalShow] = useState(null);
   const [requestsModalOpen, setRequestsModalOpen] = useState(false);
+  const [changeAvatarModalOpen, setChangeAvatarModalOpen] = useState(false);
 
   // Fetch info about the account
   useEffect(() => {
@@ -127,17 +129,37 @@ function ProfilePage() {
               />
             )}
           <div className={styles['account-name']}>
-            <div className={styles['avatar-container']}>
-              <img
-                className={styles.avatar}
-                src={
-                  account.hasAvatar
-                    ? getStorageUrl('avatar', account.id)
-                    : getStorageUrl('avatar', 'default')
-                }
-                alt=""
-              />
-            </div>
+            {account.id === user.id ? (
+              <button
+                className={`${styles['avatar-container']} ${styles['avatar-btn']}`}
+                onClick={() => setChangeAvatarModalOpen(true)}
+              >
+                <img
+                  className={styles.avatar}
+                  src={
+                    account.hasAvatar
+                      ? getStorageUrl('avatar', account.id)
+                      : getStorageUrl('avatar', 'default')
+                  }
+                  alt=""
+                />
+                <div className={styles['avatar-edit-span-container']}>
+                  <span className={styles['avatar-edit-span']}>Edit</span>
+                </div>
+              </button>
+            ) : (
+              <div className={styles['avatar-container']}>
+                <img
+                  className={styles.avatar}
+                  src={
+                    account.hasAvatar
+                      ? getStorageUrl('avatar', account.id)
+                      : getStorageUrl('avatar', 'default')
+                  }
+                  alt=""
+                />
+              </div>
+            )}
             <h1 className={styles.username}>{username}</h1>
           </div>
           <div className={styles['account-section']}>
@@ -226,6 +248,11 @@ function ProfilePage() {
                   <FollowRequestsModal
                     user={user}
                     closeModal={() => setRequestsModalOpen(false)}
+                  />
+                )}
+                {changeAvatarModalOpen && (
+                  <ChangeAvatarModal
+                    closeModal={() => setChangeAvatarModalOpen(false)}
                   />
                 )}
               </>
