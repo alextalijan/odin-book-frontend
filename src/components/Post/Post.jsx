@@ -43,7 +43,7 @@ function Post({
           </span>
         )}
       </div>
-      <p className={styles.content}>{text}</p>
+      <pre className={styles.content}>{text}</pre>
       <hr className={styles.separator} />
       <div className={styles['post-footer']}>
         <PostStats
@@ -73,7 +73,10 @@ function Post({
                         {comment.author.username}
                       </Link>
                     </b>{' '}
-                    : {comment.text}
+                    :{' '}
+                    <pre className={styles['comment-content']}>
+                      {comment.text}
+                    </pre>
                   </span>
                 </li>
               );

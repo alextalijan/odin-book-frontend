@@ -127,3 +127,8 @@
 .commenter-link:hover {
   transform: scale(1.05);
 }
+
+.comment-content {
+  display: inline-block;
+  white-space: pre-wrap;
+}

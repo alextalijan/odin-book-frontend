@@ -146,7 +146,7 @@ function PostModal({
                 <span className={styles.author}>{post.author.username}</span>
               )}
             </div>
-            <p className={styles.content}>{post.text}</p>
+            <pre className={styles.content}>{post.text}</pre>
             <div className={styles['post-footer']}>
               <PostStats
                 postId={post.id}
@@ -220,9 +220,9 @@ function PostModal({
                               {comment.author.username}
                             </Link>
                           </div>
-                          <p className={styles['comment-content']}>
+                          <pre className={styles['comment-content']}>
                             {comment.text}
-                          </p>
+                          </pre>
                           <span className={styles['comment-date']}>
                             {formatDate(comment.commentedAt)}
                           </span>
