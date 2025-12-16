@@ -1,0 +1,51 @@
+@keyframes gradient-slide {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  90% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.message {
+  text-align: center;
+  font-size: 3.2rem;
+  margin-top: 16rem;
+  font-weight: bold;
+}
+
+.link {
+  display: block;
+  margin: 1.5rem auto;
+  width: max-content;
+  text-decoration: none;
+  background-color: var(--btn-secondary);
+  font-size: 1.6rem;
+  color: inherit;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: transform 0.3s;
+}
+
+.link:hover {
+  transform: scale(1.05);
+}
+
+.number {
+  font-weight: 700;
+  background: linear-gradient(90deg, #ff0057, #fffd5a, #00ffcc, #ff0057);
+  background-size: 300% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation-name: gradient-slide;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}

@@ -9,6 +9,7 @@ import RegisterPage from './components/RegisterPage/RegisterPage';
 import HomePage from './components/HomePage/HomePage';
 import SearchPage from './components/SearchPage/SearchPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -71,6 +72,9 @@ function App() {
               <Route path="/users/:username" element={<ProfilePage />} />
             </Route>
           </Route>
+
+          {/* Not found page */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
