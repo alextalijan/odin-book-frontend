@@ -103,6 +103,7 @@ function HomePage() {
                   comments={post.comments}
                   isLiked={post.isLiked}
                   open={() => setOpenPostId(post.id)}
+                  containsImage={post.containsImage}
                   includeAccountLink={true}
                 />
               );

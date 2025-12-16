@@ -300,6 +300,7 @@ function ProfilePage() {
                           postedAt={post.postedAt}
                           comments={post.comments}
                           isLiked={post.isLiked}
+                          containsImage={post.containsImage}
                           open={() => setOpenPostId(post.id)}
                         />
                       );

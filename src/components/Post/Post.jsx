@@ -14,6 +14,7 @@ function Post({
   comments,
   isLiked,
   open,
+  containsImage,
   includeAccountLink = false,
 }) {
   return (
@@ -44,6 +45,15 @@ function Post({
         )}
       </div>
       <pre className={styles.content}>{text}</pre>
+      {containsImage && (
+        <div className={styles['image-container']}>
+          <img
+            src={getStorageUrl('post', id)}
+            alt="image"
+            className={styles['post-image']}
+          />
+        </div>
+      )}
       <hr className={styles.separator} />
       <div className={styles['post-footer']}>
         <PostStats

@@ -50,8 +50,16 @@
 .content {
   font-size: 1.4rem;
   opacity: 0.8;
-  margin-bottom: 1rem;
   white-space: pre-wrap;
+}
+
+.image-container {
+  width: 100%;
+  border: 1px solid var(--border);
+}
+
+.post-image {
+  width: 100%;
 }
 
 .post-footer {

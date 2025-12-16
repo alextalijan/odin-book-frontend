@@ -147,6 +147,15 @@ function PostModal({
               )}
             </div>
             <pre className={styles.content}>{post.text}</pre>
+            {post.containsImage && (
+              <div className={styles['image-container']}>
+                <img
+                  src={getStorageUrl('post', postId)}
+                  alt="image"
+                  className={styles['post-image']}
+                />
+              </div>
+            )}
             <div className={styles['post-footer']}>
               <PostStats
                 postId={post.id}
