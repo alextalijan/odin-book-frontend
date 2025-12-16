@@ -62,7 +62,7 @@ function RegisterPage() {
   }
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <h1 className={styles.h1}>Register</h1>
       {error && <p className={styles.error}>{error}</p>}
       <form className={styles.form}>
@@ -121,7 +121,7 @@ function RegisterPage() {
           Log In
         </Link>
       </p>
-    </>
+    </div>
   );
 }
 

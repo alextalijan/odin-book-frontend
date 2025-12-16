@@ -9,10 +9,17 @@
   }
 }
 
+.wrapper {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   text-align: center;
-  margin: 7rem auto 3rem;
+  margin: 0 auto 2rem;
   cursor: default;
 }
 
@@ -29,7 +36,7 @@
 .form {
   display: grid;
   margin: 0 auto;
-  grid-template-columns: max-content 275px;
+  grid-template-columns: max-content 200px;
   justify-content: center;
   align-items: center;
   row-gap: 0.7rem;
@@ -38,11 +45,11 @@
 
 .label,
 .input {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .input {
-  padding: 0.3rem 0.5rem;
+  padding: 0.3rem;
 }
 
 .btn-container {
@@ -56,7 +63,7 @@
   transition: transform 0.5s;
   border: none;
   color: white;
-  font-size: 2rem;
+  font-size: 1.4rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   margin-top: 1.2rem;
@@ -69,9 +76,9 @@
 
 .login-msg {
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   opacity: 0.6;
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
   cursor: default;
 }
 
