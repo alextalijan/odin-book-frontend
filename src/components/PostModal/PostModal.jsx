@@ -116,7 +116,7 @@ function PostModal({
         {loadingPost ? (
           <img
             className={styles['loading-icon']}
-            src="/public/icons/loading-icon.png"
+            src="/icons/loading-icon.png"
             alt=""
           />
         ) : postError ? (
@@ -173,7 +173,7 @@ function PostModal({
               {loadingComments ? (
                 <img
                   className={`${styles['loading-icon']} ${styles['comments-loading-icon']}`}
-                  src="/public/icons/loading-icon.png"
+                  src="/icons/loading-icon.png"
                   alt=""
                 />
               ) : commentsError ? (
@@ -194,7 +194,7 @@ function PostModal({
                       onClick={sendComment}
                     >
                       <img
-                        src="/public/icons/send-comment.png"
+                        src="/icons/send-comment.png"
                         alt="send comment"
                         className={styles['send-icon']}
                       />

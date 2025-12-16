@@ -48,7 +48,7 @@ function App() {
         <div className="container">
           <span className="logo">Social Media</span>
           <img
-            src="/public/loading-icon.png"
+            src="icons/loading-icon.png"
             alt="loading icon"
             className="loading-icon"
           />

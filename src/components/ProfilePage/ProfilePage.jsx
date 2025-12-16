@@ -113,7 +113,7 @@ function ProfilePage() {
         <div className={styles['loading-container']}>
           <img
             className={styles['loading-icon']}
-            src="/public/icons/loading-icon.png"
+            src="/icons/loading-icon.png"
           />
         </div>
       ) : accountError ? (
@@ -265,7 +265,7 @@ function ProfilePage() {
               </p>
               <img
                 className={styles['lock-icon']}
-                src="/public/icons/lock.png"
+                src="/icons/lock.png"
                 alt=""
               />
             </div>
@@ -276,7 +276,7 @@ function ProfilePage() {
                 <div className={styles['posts-loading-container']}>
                   <img
                     className={styles['posts-loading-icon']}
-                    src="/public/icons/loading-icon.png"
+                    src="/icons/loading-icon.png"
                   />
                 </div>
               ) : postsError ? (

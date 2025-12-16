@@ -81,7 +81,7 @@ function FollowingsModal({ accountId, show, closeModal }) {
             <div className={styles['loading-container']}>
               <img
                 className={styles['loading-icon']}
-                src="/public/icons/loading-icon.png"
+                src="/icons/loading-icon.png"
               />
             </div>
           ) : followersError ? (
@@ -99,7 +99,7 @@ function FollowingsModal({ accountId, show, closeModal }) {
             <div className={styles['loading-container']}>
               <img
                 className={styles['loading-icon']}
-                src="/public/icons/loading-icon.png"
+                src="/icons/loading-icon.png"
               />
             </div>
           ) : followingsError ? (

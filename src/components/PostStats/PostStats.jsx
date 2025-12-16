@@ -55,9 +55,7 @@ function PostStats({
         >
           <img
             className={styles['like-icon']}
-            src={
-              liked ? '/public/icons/liked.png' : '/public/icons/not-liked.png'
-            }
+            src={liked ? '/icons/liked.png' : '/icons/not-liked.png'}
             alt="like icon"
           />
         </button>
@@ -66,7 +64,7 @@ function PostStats({
         {numComments}{' '}
         <img
           className={styles['comments-icon']}
-          src="/public/icons/comment.png"
+          src="/icons/comment.png"
           alt="comments icon"
         />
       </button>

@@ -71,7 +71,7 @@ function HomePage() {
         <div className={styles['loading-wrapper']}>
           <span className={styles['loading-msg']}>Loading posts...</span>
           <img
-            src="/public/loading-icon.png"
+            src="/icons/loading-icon.png"
             alt="loading icon"
             className={styles['loading-icon']}
           />
