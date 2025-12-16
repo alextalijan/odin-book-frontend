@@ -55,7 +55,7 @@ function LoginPage() {
   }
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <h1 className={styles.h1}>Log In</h1>
       {error && <p className={styles.error}>{error}</p>}
       <form className={styles.form}>
@@ -107,7 +107,7 @@ function LoginPage() {
           Guest Login
         </button>
       </p>
-    </>
+    </div>
   );
 }
 
