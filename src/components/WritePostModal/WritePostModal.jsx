@@ -5,24 +5,29 @@ import { useState } from 'react';
 function WritePostModal({ closeModal, refreshPosts }) {
   const [postContent, setPostContent] = useState('');
   const [postError, setPostError] = useState(null);
+  const [file, setFile] = useState(null);
 
   function handleInput(event) {
     setPostContent(event.target.value);
+  }
+
+  function handleFileUpload(event) {
+    setFile(event.target.files[0]);
   }
 
   const post = function thatSendsPostToTheDatabase() {
     // If the content is empty, don't send anything
     if (postContent.trim() === '') return;
 
+    // Package the file into request so backend can read it
+    const formData = new FormData();
+    formData.append('content', postContent);
+    formData.append('image', file || null);
+
     fetch(import.meta.env.VITE_API + '/posts', {
       method: 'POST',
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        content: postContent,
-      }),
+      body: formData,
     })
       .then((response) => response.json())
       .then((json) => {
@@ -48,7 +53,16 @@ function WritePostModal({ closeModal, refreshPosts }) {
             name="content"
             value={postContent}
             onChange={handleInput}
+            placeholder="Write post body..."
           ></textarea>
+          <label className={styles['file-input-label']}>
+            Add image:
+            <input
+              className={styles['file-input']}
+              type="file"
+              onChange={handleFileUpload}
+            />
+          </label>
           <button onClick={post} type="button" className={styles['post-btn']}>
             Post
           </button>

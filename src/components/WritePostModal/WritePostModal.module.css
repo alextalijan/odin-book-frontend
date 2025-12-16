@@ -55,6 +55,14 @@
   border: 2px solid var(--border);
 }
 
+.file-input-label {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  align-items: center;
+  opacity: 0.85;
+}
+
 .post-btn {
   font-size: 1.3rem;
   padding: 0.5rem;
