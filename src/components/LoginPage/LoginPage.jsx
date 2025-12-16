@@ -27,7 +27,7 @@ function LoginPage() {
     }
   }
 
-  function handleLogin() {
+  function handleLogin(username, password) {
     fetch(import.meta.env.VITE_API + '/login', {
       method: 'POST',
       credentials: 'include',
@@ -88,7 +88,7 @@ function LoginPage() {
           <button
             type="button"
             className={styles['login-btn']}
-            onClick={handleLogin}
+            onClick={() => handleLogin(username, password)}
           >
             Log In
           </button>
@@ -99,6 +99,13 @@ function LoginPage() {
         <Link to="/register" className={styles['register-link']}>
           Register
         </Link>
+        <button
+          className={styles['guest-login-btn']}
+          type="button"
+          onClick={() => handleLogin('guest', 'guest')}
+        >
+          Guest Login
+        </button>
       </p>
     </>
   );
