@@ -29,7 +29,11 @@
 .heading {
   text-align: center;
   font-size: 1.8rem;
-  margin-bottom: 0.7rem;
+}
+
+.error {
+  color: var(--error);
+  text-align: center;
 }
 
 .form {
